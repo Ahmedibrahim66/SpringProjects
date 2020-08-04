@@ -13,5 +13,6 @@ public interface IBacStudentService  {
 	public boolean UpdateBacStudent(long id , BacStudent student);
 	public boolean DeleteBacStudent(long id);
 	public boolean AddCourseToStudent(long courseId, long bacStudentId);
+	public List<BacStudent> getCustomQuery(String chars);
 	
 }

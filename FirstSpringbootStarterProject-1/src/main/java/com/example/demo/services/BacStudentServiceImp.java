@@ -93,4 +93,11 @@ public class BacStudentServiceImp implements IBacStudentService {
 
 	}
 
+	@Override
+	public List<BacStudent> getCustomQuery(String chars) {
+		List<BacStudent> studentList = new ArrayList<>();
+		repository.getCustomQuery(chars).forEach(studentList::add);
+		return studentList;
+	}
+
 }

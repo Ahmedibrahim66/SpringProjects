@@ -62,6 +62,11 @@ public class BacStudentController {
 	}
 	
 	
+	@GetMapping(value="/students/bachelor/query/{chars}")
+	public List<BacStudent> getCustomQuery(@PathVariable String chars) {
+		return bacStudentService.getCustomQuery(chars);
+	}
+	
 	
 	
 	
