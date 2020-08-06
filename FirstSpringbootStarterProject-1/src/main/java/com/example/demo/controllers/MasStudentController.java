@@ -2,13 +2,18 @@ package com.example.demo.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import com.example.demo.models.MasStudent;
 import com.example.demo.services.MasStudentServiceImp;
 
@@ -22,9 +27,10 @@ public class MasStudentController {
 	
 	
 	
-	@GetMapping(value="/students/master")
-	public List<MasStudent> getAll() {
-		return masStudentService.getAllMasStudents();
+	@GetMapping(value="/students/master" ,params = { "page", "size" })
+	public List<MasStudent> getAll(@RequestParam("page") int page, @RequestParam("size") int size,
+			UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+		return masStudentService.getAllMasStudents(page, size);
 	}
 	
 	

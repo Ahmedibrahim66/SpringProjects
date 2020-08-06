@@ -1,10 +1,10 @@
 package com.example.demo.data;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.example.demo.models.Courses;
 
-public interface CoursesRepo extends JpaRepository<Courses, Long>{
+public interface CoursesRepo extends PagingAndSortingRepository<Courses, Long>{
 	
 	Courses findById(long Id);
 

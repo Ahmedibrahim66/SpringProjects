@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.example.demo.data.AddressRepo;
 import com.example.demo.data.DepartmentRepo;
@@ -22,10 +23,17 @@ public class AddressServiceImp implements IAdressService {
 	
 
 	@Override
-	public List<Address> getAllAddresses() {
+	public List<Address> getAllAddresses(int page, int size) {
+		
 		List<Address> addressList = new ArrayList<>();
-		repository.findAll().forEach(addressList::add);
+		repository.findAll(PageRequest.of(page, size)).forEach(addressList::add);
 		return addressList;
+		
+//		List<Address> addressList = new ArrayList<>();
+//		repository.findAll().forEach(addressList::add);
+//		return addressList;
+		
+		
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import com.example.demo.models.Department;
 
 public interface IDepartmentService {
 	
-	public List<Department> getAllDepartments();
+	public List<Department> getAllDepartments(int page, int size);
 	public Department getDepartment(long id);
 	public boolean AddDepartment(Department department);
 	public boolean UpdateDepartment(long id , Department department);

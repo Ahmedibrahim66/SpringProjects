@@ -5,7 +5,7 @@ import com.example.demo.models.PHDStudent;
 
 public interface IPhdStudentService {
 
-	public List<PHDStudent> getAllPhdStudents();
+	public List<PHDStudent> getAllPhdStudents(int page, int size);
 	public PHDStudent getPhdStudent(long id);
 	public boolean AddPhdStudent(PHDStudent phdStudent);
 	public boolean UpdatePhdStudent(long id , PHDStudent phdStudent);

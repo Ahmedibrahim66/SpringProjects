@@ -46,7 +46,7 @@ public class BacStudent {
 	private int startYear;
 	
 	
-	@ManyToMany( cascade= CascadeType.ALL ,mappedBy = "bacStudents")
+	@ManyToMany(mappedBy = "bacStudents")
 	@JsonIgnoreProperties({"phdStudents" , "department", "masStudents" , "bacStudents"})
 	private List<Courses> courses = new ArrayList<Courses>();
 	

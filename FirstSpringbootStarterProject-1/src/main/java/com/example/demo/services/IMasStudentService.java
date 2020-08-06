@@ -6,7 +6,7 @@ import com.example.demo.models.MasStudent;
 
 public interface IMasStudentService {
 
-	public List<MasStudent> getAllMasStudents();
+	public List<MasStudent> getAllMasStudents(int page, int size);
 	public MasStudent getMasStudent(long id);
 	public boolean AddMasStudent(MasStudent masStudent);
 	public boolean UpdateMasStudent(long id , MasStudent masStudent);

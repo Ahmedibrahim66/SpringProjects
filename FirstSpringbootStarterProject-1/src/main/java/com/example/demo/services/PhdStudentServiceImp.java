@@ -5,11 +5,11 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.CoursesRepo;
 import com.example.demo.data.PhdStudentRepo;
-import com.example.demo.models.BacStudent;
 import com.example.demo.models.Courses;
 import com.example.demo.models.PHDStudent;
 
@@ -23,10 +23,14 @@ public class PhdStudentServiceImp implements IPhdStudentService {
 	CoursesRepo coursesRepository;
 
 	@Override
-	public List<PHDStudent> getAllPhdStudents() {
+	public List<PHDStudent> getAllPhdStudents(int page, int size) {
 		List<PHDStudent> studentList = new ArrayList<>();
-		repository.findAll().forEach(studentList::add);
+		repository.findAll(PageRequest.of(page, size)).forEach(studentList::add);
 		return studentList;
+		
+//		List<PHDStudent> studentList = new ArrayList<>();
+//		repository.findAll().forEach(studentList::add);
+//		return studentList;
 	}
 
 	@Override

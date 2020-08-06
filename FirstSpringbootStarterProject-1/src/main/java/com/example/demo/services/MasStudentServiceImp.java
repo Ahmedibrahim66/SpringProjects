@@ -1,15 +1,15 @@
-package com.example.demo.services;
+ package com.example.demo.services;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.CoursesRepo;
 import com.example.demo.data.MasStudentRepo;
-import com.example.demo.models.BacStudent;
 import com.example.demo.models.Courses;
 import com.example.demo.models.MasStudent;
 
@@ -23,10 +23,16 @@ public class MasStudentServiceImp implements IMasStudentService {
 	CoursesRepo coursesRepository;
 	
 	@Override
-	public List<MasStudent> getAllMasStudents() {
+	public List<MasStudent> getAllMasStudents(int page, int size) {
+		
 		List<MasStudent> studentList = new ArrayList<>();
-		repository.findAll().forEach(studentList::add);
+		repository.findAll(PageRequest.of(page, size)).forEach(studentList::add);
 		return studentList;
+		
+		
+//		List<MasStudent> studentList = new ArrayList<>();
+//		repository.findAll().forEach(studentList::add);
+//		return studentList;
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.example.demo.models.Instructor;
 
 public interface IInstructorService {
 
-	public List<Instructor> getAllInstructors();
+	public List<Instructor> getAllInstructors(int page, int size);
 	public Instructor getInstructor(long id);
 	public boolean AddInstructor(Instructor instructor);
 	public boolean UpdateInstructor(long id , Instructor instructor);

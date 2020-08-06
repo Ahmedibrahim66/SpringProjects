@@ -6,7 +6,9 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import com.example.demo.data.BacStudentRepo;
 import com.example.demo.data.CoursesRepo;
 import com.example.demo.models.BacStudent;
@@ -21,12 +23,18 @@ public class BacStudentServiceImp implements IBacStudentService {
 	@Autowired
 	CoursesRepo coursesRepository;
 
-	public List<BacStudent> getAllBacStudents() {
-		List<BacStudent> studentList = new ArrayList<>();
-		repository.findAll().forEach(studentList::add);
-		return studentList;
+	public List<BacStudent> getAllBacStudents(int page, int size) {
+		List<BacStudent> studentListPaged = new ArrayList<>();
+		repository.findAll(PageRequest.of(page, size)).forEach(studentListPaged::add);
+		return studentListPaged;
 
 	}
+
+//	public List<BacStudent> getAllBacStudents() {
+//		List<BacStudent> studentList = new ArrayList<>();
+//		repository.findAll().forEach(studentList::add);
+//		return studentList;
+//	}
 
 	public BacStudent getBacStudent(long id) {
 		BacStudent student = repository.findById(id);
@@ -56,6 +64,10 @@ public class BacStudentServiceImp implements IBacStudentService {
 		if (student == null)
 			throw new EntityNotFoundException("No bachelor student with Id = " + id + "  is found");
 		else {
+			try {
+				repository.DeleteBacStudentFromCoursesJoinedTable(id);
+			}catch(Exception e) {}
+
 			repository.deleteById(id);
 			return true;
 		}
@@ -99,5 +111,29 @@ public class BacStudentServiceImp implements IBacStudentService {
 		repository.getCustomQuery(chars).forEach(studentList::add);
 		return studentList;
 	}
+	
+	@Override
+	public List<BacStudent> getCustomNativeQuery() {
+		List<BacStudent> studentList = new ArrayList<>();
+		repository.getCustomNativeQuery().forEach(studentList::add);
+		return studentList;
+	}
+	
+	
+	public double getHighestGPA() {
+		return repository.getHighestGPA();
+	}
+	
+	public int getStudetCount() {
+		return repository.getStudetCount();
+	}
+	
+	public List<BacStudent> getStudentsWithNoCourses(){
+		List<BacStudent> studentList = new ArrayList<>();
+		repository.getStudentsWithNoCourses().forEach(studentList::add);
+		return studentList;
+	}
+	
+	
 
 }

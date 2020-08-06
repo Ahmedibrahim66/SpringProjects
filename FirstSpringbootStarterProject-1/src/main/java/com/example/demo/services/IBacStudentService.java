@@ -7,12 +7,13 @@ import com.example.demo.models.BacStudent;
 
 public interface IBacStudentService  {
 	
-	public List<BacStudent> getAllBacStudents();
+	public List<BacStudent> getAllBacStudents(int page, int size);
 	public BacStudent getBacStudent(long id);
 	public boolean AddBacStudent(BacStudent student);
 	public boolean UpdateBacStudent(long id , BacStudent student);
 	public boolean DeleteBacStudent(long id);
 	public boolean AddCourseToStudent(long courseId, long bacStudentId);
 	public List<BacStudent> getCustomQuery(String chars);
-	
+	public List<BacStudent> getCustomNativeQuery();
+
 }

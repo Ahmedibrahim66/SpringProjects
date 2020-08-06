@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.example.demo.data.DepartmentRepo;
 import com.example.demo.models.Department;
@@ -16,10 +17,16 @@ public class DepartmentServiceImp implements IDepartmentService {
 	DepartmentRepo repository;
 
 	@Override
-	public List<Department> getAllDepartments() {
+	public List<Department> getAllDepartments(int page, int size) {
+		
 		List<Department> departmentList = new ArrayList<>();
-		repository.findAll().forEach(departmentList::add);
+		repository.findAll(PageRequest.of(page, size)).forEach(departmentList::add);
 		return departmentList;
+		
+//		List<Department> departmentList = new ArrayList<>();
+//		repository.findAll().forEach(departmentList::add);
+//		return departmentList;
+		
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.data.CoursesRepo;
@@ -15,7 +16,6 @@ import com.example.demo.data.InstructorRepo;
 import com.example.demo.models.Courses;
 import com.example.demo.models.Department;
 import com.example.demo.models.Instructor;
-import com.example.demo.models.MasStudent;
 
 @Service
 public class InstructorServiceImp implements IInstructorService {
@@ -32,10 +32,16 @@ public class InstructorServiceImp implements IInstructorService {
 	
 	
 	@Override
-	public List<Instructor> getAllInstructors() {
+	public List<Instructor> getAllInstructors(int page, int size) {
+		
 		List<Instructor> instructorList = new ArrayList<>();
-		repository.findAll().forEach(instructorList::add);
+		repository.findAll(PageRequest.of(page, size)).forEach(instructorList::add);
 		return instructorList;
+		
+		
+//		List<Instructor> instructorList = new ArrayList<>();
+//		repository.findAll().forEach(instructorList::add);
+//		return instructorList;
 	}
 
 	@Override

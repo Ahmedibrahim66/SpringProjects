@@ -5,7 +5,7 @@ import com.example.demo.models.Address;
 
 public interface IAdressService {
 	
-	public List<Address> getAllAddresses();
+	public List<Address> getAllAddresses(int page, int size);
 	public Address getAddress(long id);
 	public boolean AddAddress(Address address);
 	public boolean UpdateAddress(long id , Address address);
