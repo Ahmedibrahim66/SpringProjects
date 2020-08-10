@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.models.MasStudent;
-import com.example.demo.services.MasStudentServiceImp;
+import com.example.demo.services.IMasStudentService;
 
 
 @RestController
@@ -23,7 +23,7 @@ import com.example.demo.services.MasStudentServiceImp;
 public class MasStudentController {
 	
 	@Autowired
-	MasStudentServiceImp masStudentService;
+	IMasStudentService masStudentService;
 	
 	
 	

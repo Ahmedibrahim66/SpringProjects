@@ -64,9 +64,11 @@ public class BacStudentServiceImp implements IBacStudentService {
 		if (student == null)
 			throw new EntityNotFoundException("No bachelor student with Id = " + id + "  is found");
 		else {
+
 			try {
 				repository.DeleteBacStudentFromCoursesJoinedTable(id);
-			}catch(Exception e) {}
+			} catch (Exception e) {
+			}
 
 			repository.deleteById(id);
 			return true;
@@ -111,29 +113,26 @@ public class BacStudentServiceImp implements IBacStudentService {
 		repository.getCustomQuery(chars).forEach(studentList::add);
 		return studentList;
 	}
-	
+
 	@Override
-	public List<BacStudent> getCustomNativeQuery() {
+	public List<BacStudent> getCustomNativeQuery(int size, int page) {
 		List<BacStudent> studentList = new ArrayList<>();
-		repository.getCustomNativeQuery().forEach(studentList::add);
+		repository.getCustomNativeQuery(PageRequest.of(page, size)).forEach(studentList::add);
 		return studentList;
 	}
-	
-	
+
 	public double getHighestGPA() {
 		return repository.getHighestGPA();
 	}
-	
+
 	public int getStudetCount() {
 		return repository.getStudetCount();
 	}
-	
-	public List<BacStudent> getStudentsWithNoCourses(){
+
+	public List<BacStudent> getStudentsWithNoCourses() {
 		List<BacStudent> studentList = new ArrayList<>();
 		repository.getStudentsWithNoCourses().forEach(studentList::add);
 		return studentList;
 	}
-	
-	
 
 }

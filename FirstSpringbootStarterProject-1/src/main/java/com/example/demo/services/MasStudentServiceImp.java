@@ -78,6 +78,10 @@ public class MasStudentServiceImp implements IMasStudentService {
 		if (student == null)
 			throw new EntityNotFoundException("No master Student with Id = " + id + "  is found");
 		else {
+			try {
+				repository.DeleteMasStudentFromCoursesJoinedTable(id);
+			} catch (Exception e) {
+			}
 			repository.deleteById(id);
 			return true;
 		}

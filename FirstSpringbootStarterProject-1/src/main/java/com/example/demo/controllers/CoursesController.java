@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.models.Courses;
-import com.example.demo.services.CoursesServiceImp;
+import com.example.demo.services.ICoursesService;
 
 @RestController
 @RequestMapping(value = "/api")
 public class CoursesController {
 
 	@Autowired
-	CoursesServiceImp coursesService;
+	ICoursesService coursesService;
 	
 	
 	
@@ -55,9 +55,9 @@ public class CoursesController {
 		return coursesService.DeleteCourse(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST , value = "/departments/{id}/courses")
-	public Boolean AddInstructorToDepartment(@PathVariable long id, @RequestBody Courses course) {
-		return coursesService.AddCourseToDepartment(id, course);
+	@RequestMapping(method = RequestMethod.POST , value = "/departments/{id}/courses/{courseId}")
+	public Boolean AddCourseToDepartment(@PathVariable long id, @PathVariable long courseId) {
+		return coursesService.AddCourseToDepartment(id, courseId);
 	}
 	
 	

@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.models.Department;
-import com.example.demo.services.DepartmentServiceImp;
+import com.example.demo.services.IDepartmentService;
 
 @RestController
 @RequestMapping(value = "/api")
 public class DepartmentController {
 	
 	@Autowired
-	DepartmentServiceImp departmentService;
+	IDepartmentService departmentService;
 	
 	
 	

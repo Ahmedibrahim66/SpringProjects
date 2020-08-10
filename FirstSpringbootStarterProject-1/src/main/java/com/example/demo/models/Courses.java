@@ -3,7 +3,6 @@ package com.example.demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +39,7 @@ public class Courses {
 	@Column
 	private int hours;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name="departmentId")
 	@JsonIgnoreProperties({"courses" , "instructors" , "address"})
 	private Department department;
@@ -54,20 +53,20 @@ public class Courses {
 	private List<BacStudent> bacStudents = new ArrayList<BacStudent>();
 	
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany()
 	@JoinTable(name = "masStudent_course", joinColumns=@JoinColumn(name="masStudent_id"),
 	inverseJoinColumns=@JoinColumn(name="course_id"))
 	@JsonIgnoreProperties({"courses"})
 	private List<MasStudent> MasStudents = new ArrayList<MasStudent>();
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany()
 	@JoinTable(name = "PhdStudent_course", joinColumns=@JoinColumn(name="phdStudent_id"),
 	inverseJoinColumns=@JoinColumn(name="course_id"))
 	@JsonIgnoreProperties({"courses"})
 	private List<PHDStudent> PhdStudents = new ArrayList<PHDStudent>();
 	
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany()
 	@JoinTable(name = "Instructors_course", joinColumns=@JoinColumn(name="Instructor_id"),
 	inverseJoinColumns=@JoinColumn(name="course_id"))
 	@JsonIgnoreProperties({"courses"})

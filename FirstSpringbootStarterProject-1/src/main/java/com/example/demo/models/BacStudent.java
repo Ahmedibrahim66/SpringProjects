@@ -2,10 +2,9 @@ package com.example.demo.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +45,7 @@ public class BacStudent {
 	private int startYear;
 	
 	
-	@ManyToMany(mappedBy = "bacStudents")
+	@ManyToMany(mappedBy = "bacStudents", fetch = FetchType.EAGER )
 	@JsonIgnoreProperties({"phdStudents" , "department", "masStudents" , "bacStudents"})
 	private List<Courses> courses = new ArrayList<Courses>();
 	

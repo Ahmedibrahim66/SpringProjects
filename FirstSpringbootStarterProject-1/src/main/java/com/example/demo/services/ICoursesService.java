@@ -11,6 +11,6 @@ public interface ICoursesService {
 	public boolean AddCourse(Courses course);
 	public boolean UpdateCourse(long id , Courses course);
 	public boolean DeleteCourse(long id);
-	public boolean AddCourseToDepartment(long id, Courses course);
+	public boolean AddCourseToDepartment(long id, long courseId);
 
 }

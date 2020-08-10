@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.models.BacStudent;
-import com.example.demo.services.BacStudentServiceImp;
+import com.example.demo.services.IBacStudentService;
 
 @RestController
 @RequestMapping(value = "/api")
 public class BacStudentController {
 
 	@Autowired
-	BacStudentServiceImp bacStudentService;
+	IBacStudentService bacStudentService;
 
 //	@GetMapping(value = "/students/bachelor")
 //	public List<BacStudent> getAll() {
@@ -68,9 +68,10 @@ public class BacStudentController {
 		return bacStudentService.getCustomQuery(chars);
 	}
 	
-	@GetMapping(value = "/students/bachelor/nativequery")
-	public List<BacStudent> getCustomNativeQuery() {
-		return bacStudentService.getCustomNativeQuery();
+	@GetMapping(params = { "page", "size" },value = "/students/bachelor/nativequery")
+	public List<BacStudent> getCustomNativeQuery(@RequestParam("page") int page, @RequestParam("size") int size,
+			UriComponentsBuilder uriBuilder, HttpServletResponse response) {
+		return bacStudentService.getCustomNativeQuery(size, page);
 	}
 	
 	

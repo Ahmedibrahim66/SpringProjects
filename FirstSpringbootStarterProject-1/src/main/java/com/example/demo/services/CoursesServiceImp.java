@@ -84,6 +84,16 @@ public class CoursesServiceImp implements ICoursesService {
 		if (course == null)
 			throw new EntityNotFoundException("No course with Id = " + id + "  is found");
 		else {
+			try{
+				repository.DeleteBacStudentFromCoursesJoinedTable(id);
+			}catch(Exception e) {}
+			try{
+				repository.DeleteMasStudentFromCoursesJoinedTable(id);
+			}catch(Exception e) {}
+			try{
+				repository.DeletePhdStudentFromCoursesJoinedTable(id);
+			}catch(Exception e) {}
+
 			repository.deleteById(id);
 			return true;
 		}
@@ -91,16 +101,29 @@ public class CoursesServiceImp implements ICoursesService {
 	}
 
 	@Override
-	public boolean AddCourseToDepartment(long id, Courses course) {
+	public boolean AddCourseToDepartment(long id, long courseId) {
 		Department department = depRepository.findById(id);
 		if(department == null)
 			throw new EntityNotFoundException("No department with Id = " + id + "  is found");
 		else {
-			course.setDepartment(department);
-			repository.save(course);
-			department.getCourses().add(course);
-			depRepository.save(department);
-			return true;	
+			Courses course = repository.findById(courseId);
+			if (course == null)
+				throw new EntityNotFoundException("No course with Id = " + courseId + "  is found");
+			else {
+				try {
+					
+					department.getCourses().add(course);
+					depRepository.save(department);
+					course.setDepartment(department);
+					repository.save(course);
+					return true;
+
+				} catch (Exception e) {
+					throw e;
+				}
+
+			}
+
 		}
 	}
 

@@ -11,7 +11,7 @@ public interface IInstructorService {
 	public boolean AddInstructor(Instructor instructor);
 	public boolean UpdateInstructor(long id , Instructor instructor);
 	public boolean DeleteInstructor(long id);
-	public boolean AddInstructorToDepartment(long id, Instructor instructor);
+	public boolean AddInstructorToDepartment(long id, long instructorId);
 	public boolean AddInstructorToCourse(long courseId, long instructorId);
 
 }

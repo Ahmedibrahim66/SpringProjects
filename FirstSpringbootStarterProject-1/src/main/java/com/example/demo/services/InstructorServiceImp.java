@@ -23,22 +23,19 @@ public class InstructorServiceImp implements IInstructorService {
 	@Autowired
 	InstructorRepo repository;
 
-	@Autowired 
+	@Autowired
 	DepartmentRepo depRepository;
-	
+
 	@Autowired
 	CoursesRepo coursesRepository;
-	
-	
-	
+
 	@Override
 	public List<Instructor> getAllInstructors(int page, int size) {
-		
+
 		List<Instructor> instructorList = new ArrayList<>();
 		repository.findAll(PageRequest.of(page, size)).forEach(instructorList::add);
 		return instructorList;
-		
-		
+
 //		List<Instructor> instructorList = new ArrayList<>();
 //		repository.findAll().forEach(instructorList::add);
 //		return instructorList;
@@ -69,7 +66,7 @@ public class InstructorServiceImp implements IInstructorService {
 		if (instructorFromRep == null)
 			throw new EntityNotFoundException("No instructor with Id = " + id + "  is found");
 		else {
-			
+
 			try {
 				BeanUtils.copyProperties(instructor, instructorFromRep);
 				repository.save(instructorFromRep);
@@ -87,22 +84,38 @@ public class InstructorServiceImp implements IInstructorService {
 		if (instructor == null)
 			throw new EntityNotFoundException("No instructor with Id = " + id + "  is found");
 		else {
+			try {
+				repository.DeleteInstructorFromCoursesJoinedTable(id);
+			} catch (Exception e) {
+			}
 			repository.deleteById(id);
 			return true;
 		}
 	}
 
 	@Override
-	public boolean AddInstructorToDepartment(long id, Instructor instructor) {
+	public boolean AddInstructorToDepartment(long id, long instructorId) {
 		Department department = depRepository.findById(id);
-		if(department == null)
+		if (department == null)
 			throw new EntityNotFoundException("No department with Id = " + id + "  is found");
 		else {
-			instructor.setDepartment(department);
-			repository.save(instructor);
-			department.getInstructors().add(instructor);
-			depRepository.save(department);
-			return true;	
+			Instructor instructor = repository.findById(instructorId);
+			if (instructor == null)
+				throw new EntityNotFoundException("No instructors with Id = " + instructorId + "  is found");
+			else {
+
+				department.getInstructors().add(instructor);
+				depRepository.save(department);
+				instructor.setDepartment(department);
+				repository.save(instructor);
+				return true;
+//				instructor.setDepartment(department);
+//				repository.save(instructor);
+//				department.getInstructors().add(instructor);
+//				depRepository.save(department);
+//				return true;
+
+			}
 		}
 	}
 
@@ -120,16 +133,13 @@ public class InstructorServiceImp implements IInstructorService {
 					course.getInstructors().add(instructor);
 					coursesRepository.save(course);
 					return true;
-				}catch(Exception e){throw e;}
-				
-			}
 
+				} catch (Exception e) {
+					throw e;
+				}
+
+			}
 		}
 	}
-	
-
-	
-	
-
 
 }

@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.models.Address;
-import com.example.demo.services.AddressServiceImp;
+import com.example.demo.services.IAdressService;
 
 @RestController
 @RequestMapping(value = "/api")
 public class AddressController {
 	
 	@Autowired
-	AddressServiceImp addressService;
+	IAdressService addressService;
 	
 	
 	

@@ -1,9 +1,9 @@
 package com.example.demo.data;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +22,7 @@ public interface BacStudentRepo extends JpaRepository<BacStudent, Long>{
 	
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM bac_students")
-	List<BacStudent> getCustomNativeQuery();
+	List<BacStudent> getCustomNativeQuery(Pageable pageable);
 	
 	
 	@Query(nativeQuery = true , value = "select MAX(gpa) from bac_students")

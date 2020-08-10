@@ -76,6 +76,10 @@ public class PhdStudentServiceImp implements IPhdStudentService {
 		if (student == null)
 			throw new EntityNotFoundException("No PHD Student with Id = " + id + "  is found");
 		else {
+			try {
+				repository.DeletePhdStudentFromCoursesJoinedTable(id);
+			} catch (Exception e) {
+			}
 			repository.deleteById(id);
 			return true;
 		}

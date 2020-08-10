@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.demo.models.Instructor;
-import com.example.demo.services.InstructorServiceImp;
+import com.example.demo.services.IInstructorService;
 
 
 @RestController
@@ -23,7 +23,7 @@ import com.example.demo.services.InstructorServiceImp;
 public class InstructorController {
 	
 	@Autowired
-	InstructorServiceImp instructorService;
+	IInstructorService instructorService;
 	
 	@GetMapping(value= "/instructors" ,params = { "page", "size" })
 	public List<Instructor> getAll(@RequestParam("page") int page, @RequestParam("size") int size,
@@ -54,13 +54,13 @@ public class InstructorController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST , value = "/departments/{id}/instructors")
-	public Boolean AddInstructorToDepartment(@PathVariable long id, @RequestBody Instructor instructor) {
-		return instructorService.AddInstructorToDepartment(id, instructor);
+	@RequestMapping(method = RequestMethod.POST , value = "/departments/{id}/instructors/{instructorId}")
+	public Boolean AddInstructorToDepartment(@PathVariable long id, @PathVariable long instructorId) {
+		return instructorService.AddInstructorToDepartment(id,  instructorId);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST , value = "/courses/{courseId}/instructors/{instructorId}")
-	public Boolean AddCourseToStudent(@PathVariable long courseId, @PathVariable long instructorId) {
+	public Boolean AddInstructorToCourse(@PathVariable long courseId, @PathVariable long instructorId) {
 		return instructorService.AddInstructorToCourse(courseId, instructorId);
 		
 	}

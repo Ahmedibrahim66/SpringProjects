@@ -3,7 +3,6 @@ package com.example.demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,7 +48,7 @@ public class MasStudent {
 	private int startYear;
 	
 	
-	@ManyToMany( cascade= CascadeType.ALL ,mappedBy = "MasStudents")
+	@ManyToMany(mappedBy = "MasStudents")
 	@JsonIgnoreProperties({"phdStudents" , "department", "masStudents" , "bacStudents"})
 	private List<Courses> courses = new ArrayList<Courses>();
 	

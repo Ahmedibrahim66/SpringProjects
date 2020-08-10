@@ -14,6 +14,10 @@ public interface IBacStudentService  {
 	public boolean DeleteBacStudent(long id);
 	public boolean AddCourseToStudent(long courseId, long bacStudentId);
 	public List<BacStudent> getCustomQuery(String chars);
-	public List<BacStudent> getCustomNativeQuery();
+	public List<BacStudent> getCustomNativeQuery(int size, int page);
+	public double getHighestGPA();
+	public int getStudetCount();
+	public List<BacStudent> getStudentsWithNoCourses();
+	
 
 }

@@ -2,9 +2,7 @@ package com.example.demo.models;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,7 +32,7 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long id;
-	
+
 	
 	@Column(nullable = false)
 	private String name;
@@ -45,12 +43,12 @@ public class Department {
 	private Address address;
 	
 	
-	@OneToMany(cascade = CascadeType.ALL , mappedBy = "department", fetch = FetchType.LAZY)
+	@OneToMany(orphanRemoval=true , mappedBy = "department", fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"department"})
 	private List<Instructor> instructors = new ArrayList<Instructor>();
 	
 	
-	@OneToMany(cascade = CascadeType.ALL , mappedBy = "department", fetch = FetchType.LAZY)
+	@OneToMany(orphanRemoval=true  , mappedBy = "department", fetch = FetchType.LAZY )
 	@JsonIgnoreProperties({"department"})
 	private List<Courses> courses = new ArrayList<Courses>();
 	
